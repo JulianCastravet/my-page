@@ -220,8 +220,8 @@ const projects = [
       },
     ],
     image: julian,
-    repo: 'https://github.com/shaqdeff/KomiKult',
-    demo: 'https://shaqdeff.github.io/KomiKult/',
+    repo: 'https://github.com/JulianCastravet/myPage',
+    demo: 'https://juliancastravet.github.io/myPage/',
   },
   {
     id: 'project-4',
