@@ -1,13 +1,10 @@
 # Portfolio Template
 
-
-I created this portfolio to use as my own but ended up doing something else entirely. However, instead of keeping it buried, I decided to put it up here on GitHub as an open-source resource to help individuals to learn, adapt, and create their own portfolios. Feel free to customize and modify the theme and components to suit your personal style and branding preferences.
+This is my official page
 
 ## License and Attribution
 
 The code in this repository is released under the [MIT](https://github.com/shaqdeff/Portfolio-Template/blob/90213d4887074d1d29434f706afad3d12fa33f5f/MIT.md) License, which grants you the freedom to use, modify, and distribute the template as your own. However, if you choose to use the site's design largely unmodified, kindly credit me as the original designer of the site.
-
-All projects and experiences included in this portfolio are the result of my own efforts and creativity. Please refrain from presenting them as your own.
 
 ## Built With
 
@@ -15,6 +12,7 @@ All projects and experiences included in this portfolio are the result of my own
 - Three.js
 - Framer Motion
 - TailwindCSS
+- Typescript
 
 ## Live Demo
 
@@ -31,9 +29,7 @@ Make sure you have node `16.0.0` or higher and npm `9.0.0` or higher installed.
 ### Setup
 
 - With git, clone the code to your machine, or download a ZIP of all the files directly.
-- [Download the ZIP file from this location](https://github.com/JulianCastravet/myPage.git) 
-
-
+- [Download the ZIP file from this location](https://github.com/JulianCastravet/myPage.git)
 
 - Once the files are on your machine, open the **Portfolio-Template** folder in [Visual Studio Code](https://code.visualstudio.com/download).
 
@@ -77,7 +73,7 @@ npm run preview
 
 ## Authors
 
-👤 **Shaquille Ndunda**
+👤 **Julian Castravet** in collaboration with 👤 **Shaquille Ndunda**
 
 - GitHub: [@JulianCastravet](https://github.com/JulianCastravet)
 - LinkedIn: [Julian Castravet](https://www.linkedin.com/in/julian-castravet-a67698133/)
