@@ -37,7 +37,7 @@ const About = () => {
       <motion.p
         variants={fadeIn('', '', 0.1, 1)}
         className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]">
-        Passionate full stack web developer adept at crafting end-to-end solutions with modern technologies. Skilled in front-end frameworks, back-end development, and database management. Committed to delivering high-quality, scalable applications that exceed client expectations.
+        Passionate web developer adept at crafting end-to-end solutions with modern technologies. Skilled in front-end frameworks like Angular and ReactJS. Committed to delivering high-quality, scalable applications that exceed client expectations.
       </motion.p>
 
       <div className="mt-20 flex flex-wrap gap-10">
