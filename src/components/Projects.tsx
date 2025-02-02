@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { SectionWrapper } from '../hoc';
-import { styles } from '../styles';
-import { github, pineapple, pineappleHover } from '../assets';
-import { projects } from '../constants';
-import { fadeIn, textVariant, staggerContainer } from '../utils/motion';
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { styles } from "../styles";
+import { github, pineapple, pineappleHover } from "../assets";
+import { projects } from "../constants";
+import {
+  fadeIn,
+  textVariant,
+  staggerContainer,
+  DirectionType,
+  TransitionType,
+} from "../utils/motion";
+import { ProjectInterface } from "../interfaces";
+import { Tag } from "primereact/tag";
+import { PrimeReactProvider } from "primereact/api";
+import { SectionWrapper } from "../hoc";
 
 const ProjectCard = ({
   id,
@@ -15,19 +24,60 @@ const ProjectCard = ({
   demo,
   index,
   active,
+  tags,
   handleClick,
-}) => {
+}: ProjectInterface) => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (buttonRef.current) {
+      const iconElement = buttonRef.current.querySelector(".btn-icon");
+      if (iconElement) {
+        iconElement.setAttribute("src", pineappleHover);
+      }
+    }
+  }, [pineappleHover]);
+
+  const onMouseOver = useCallback(() => {
+    () => {
+      if (buttonRef.current) {
+        const iconElement = buttonRef.current.querySelector(".btn-icon");
+        if (iconElement) {
+          iconElement.setAttribute("src", pineappleHover);
+        }
+      }
+    };
+  }, [pineappleHover]);
+
+  const onMouseOut = useCallback(() => {
+    () => {
+      if (buttonRef.current) {
+        const iconElement = buttonRef.current.querySelector(".btn-icon");
+        if (iconElement) {
+          iconElement.setAttribute("src", pineapple);
+        }
+      }
+    };
+  }, [pineapple]);
+
   return (
     <motion.div
-      variants={fadeIn('right', 'spring', index * 0.5, 0.75)}
+      variants={fadeIn(
+        DirectionType.right,
+        TransitionType.linear,
+        index * 0.5,
+        0.75
+      )}
       className={`relative ${
-        active === id ? 'lg:flex-[3.5] flex-[10]' : 'lg:flex-[0.5] flex-[2]'
+        active === id ? "lg:flex-[3.5] flex-[10]" : "lg:flex-[0.5] flex-[2]"
       } flex items-center justify-center min-w-[170px] 
       h-[420px] cursor-pointer card-shadow`}
-      onClick={() => handleClick(id)}>
+      onClick={() => handleClick(id)}
+    >
       <div
         className="absolute top-0 left-0 z-10 bg-jetLight 
-      h-full w-full opacity-[0.5] rounded-[24px]"></div>
+      h-full w-full opacity-[0.5] rounded-[24px]"
+      ></div>
 
       <img
         src={image}
@@ -41,21 +91,39 @@ const ProjectCard = ({
             className="font-extrabold font-beckman uppercase w-[200px] h-[30px] 
         whitespace-nowrap sm:text-[27px] text-[18px] text-timberWolf tracking-[1px]
         absolute z-0 lg:bottom-[7rem] lg:rotate-[-90deg] lg:origin-[0,0]
-        leading-none z-20">
+        leading-none z-20"
+          >
             {name}
           </h3>
         </div>
       ) : (
         <>
           <div
+            className="absolute top-0 p-8 justify-start w-full 
+            flex-row  rounded-b-[24px] z-20 flex gap-1"
+          >
+            <PrimeReactProvider value={{ unstyled: true }}>
+              {tags.map((tag, index) => (
+                <Tag
+                  style={{ backgroundColor: tag.color }}
+                  value={tag.name}
+                  key={index}
+                  className="capitalize rounded p-2 text-xs"
+                />
+              ))}
+            </PrimeReactProvider>
+          </div>
+          <div
             className="absolute bottom-0 p-8 justify-start w-full 
-            flex-col bg-[rgba(122,122,122,0.5)] rounded-b-[24px] z-20">
+            flex-col bg-[rgba(122,122,122,0.5)] rounded-b-[24px] z-20"
+          >
             <div className="absolute inset-0 flex justify-end m-3">
               <div
-                onClick={() => window.open(repo, '_blank')}
+                onClick={() => window.open(repo, "_blank")}
                 className="bg-night sm:w-11 sm:h-11 w-10 h-10 rounded-full 
                   flex justify-center items-center cursor-pointer
-                  sm:opacity-[0.9] opacity-[0.8]">
+                  sm:opacity-[0.9] opacity-[0.8]"
+              >
                 <img
                   src={github}
                   alt="source code"
@@ -66,16 +134,19 @@ const ProjectCard = ({
 
             <h2
               className="font-bold sm:text-[32px] text-[24px] 
-              text-timberWolf uppercase font-beckman sm:mt-0 -mt-[1rem]">
+              text-timberWolf uppercase font-beckman sm:mt-0 -mt-[1rem]"
+            >
               {name}
             </h2>
             <p
               className="text-silver sm:text-[14px] text-[12px] 
               max-w-3xl sm:leading-[24px] leading-[18px]
-              font-poppins tracking-[1px]">
+              font-poppins tracking-[1px]"
+            >
               {description}
             </p>
             <button
+              ref={buttonRef}
               className="live-demo flex justify-between 
               sm:text-[16px] text-[14px] text-timberWolf 
               font-bold font-beckman items-center py-5 pl-2 pr-3 
@@ -84,17 +155,10 @@ const ProjectCard = ({
               sm:mt-[22px] mt-[16px] hover:bg-battleGray 
               hover:text-eerieBlack transition duration-[0.2s] 
               ease-in-out"
-              onClick={() => window.open(demo, '_blank')}
-              onMouseOver={() => {
-                document
-                  .querySelector('.btn-icon')
-                  .setAttribute('src', pineappleHover);
-              }}
-              onMouseOut={() => {
-                document
-                  .querySelector('.btn-icon')
-                  .setAttribute('src', pineapple);
-              }}>
+              onClick={() => window.open(demo, "_blank")}
+              onMouseOver={onMouseOver}
+              onMouseOut={onMouseOut}
+            >
               <img
                 src={pineapple}
                 alt="pineapple"
@@ -111,7 +175,7 @@ const ProjectCard = ({
 };
 
 const Projects = () => {
-  const [active, setActive] = useState('project-2');
+  const [active, setActive] = useState("project-2");
 
   return (
     <div className="-mt-[6rem]">
@@ -122,22 +186,25 @@ const Projects = () => {
 
       <div className="w-full flex">
         <motion.p
-          variants={fadeIn('', '', 0.1, 1)}
-          className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]">
+          variants={fadeIn(DirectionType.left, TransitionType.ease, 0.1, 1)}
+          className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]"
+        >
           These projects demonstrate my expertise with practical examples of
-          some of my work, including brief descriptions and links to code
-          repositories and live demos. They showcase my ability to tackle
+          some of my work, including brief descriptions and links to official
+          companies. They showcase my ability as a Front-End Engineer to tackle
           intricate challenges, adapt to various technologies, and efficiently
           oversee projects.
         </motion.p>
       </div>
 
       <motion.div
+        //@ts-expect-error
         variants={staggerContainer}
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
-        className={`${styles.innerWidth} mx-auto flex flex-col`}>
+        className={`${styles.innerWidth} mx-auto flex flex-col`}
+      >
         <div className="mt-[50px] flex lg:flex-row flex-col min-h-[70vh] gap-5">
           {projects.map((project, index) => (
             <ProjectCard
@@ -154,4 +221,4 @@ const Projects = () => {
   );
 };
 
-export default SectionWrapper(Projects, 'projects');
+export default SectionWrapper(Projects, "projects");
