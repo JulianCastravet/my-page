@@ -25,6 +25,7 @@ import {
   julian,
   angular,
   dcc,
+  mars
 } from "../assets";
 
 export const navLinks = [
@@ -206,7 +207,7 @@ const projects = [
     ],
     image: stewart,
     repo: "https://github.com/JulianCastravet/theWingsAcademy",
-    demo: "https://github.com/JulianCastravet/theWingsAcademy",
+    demo: "https://juliancastravet.github.io/the-wings-academy/",
   },
   {
     id: "project-4",
@@ -227,8 +228,8 @@ const projects = [
       },
     ],
     image: julian,
-    repo: "https://github.com/JulianCastravet/myPage",
-    demo: "https://juliancastravet.github.io/myPage/",
+    repo: "https://github.com/JulianCastravet/my-page",
+    demo: "https://juliancastravet.github.io/my-page/",
   },
   {
     id: "project-5",
@@ -251,6 +252,28 @@ const projects = [
     image: bookstore,
     repo: "https://github.com/JulianCastravet/BookStore",
     demo: "https://github.com/JulianCastravet/BookStore",
+  },
+    {
+    id: "project-6",
+    name: "Mars Hospital",
+    description: "A hospital for patients on planet Mars",
+    tags: [
+      {
+        name: "ReactJS",
+        color: "#0ea5e9",
+      },
+      {
+        name: "TypeScript",
+        color: "#22c55e",
+      },
+      {
+        name: "tailwind",
+        color: "#f97316",
+      },
+    ],
+    image: mars,
+    repo: "https://github.com/JulianCastravet/hospital",
+    demo: "https://hospital-puce-kappa.vercel.app/",
   },
 ];
 

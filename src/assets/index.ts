@@ -48,6 +48,7 @@ import brizy from "./projects/brizy.png";
 import brizyLogo from "./projects/brizyLogo.png";
 
 import julian from "./projects/julian.png";
+import mars from "./projects/mars.png";
 
 export {
   bwmap,
@@ -92,4 +93,5 @@ export {
   julian,
   julianSolo,
   dcc,
+  mars
 };

@@ -31,6 +31,7 @@ export enum TransitionType {
   easeOut = "ease-out",
   easeInOut = "ease-in-out",
   cubicBezier = "cubic-bezier",
+  tween = "tween",
 }
 
 export const fadeIn = (

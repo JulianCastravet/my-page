@@ -1,60 +1,60 @@
-import { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
-import emailjs from '@emailjs/browser';
-import { styles } from '../styles';
-import { SectionWrapper } from '../hoc';
-import { slideIn } from '../utils/motion';
-import { send, sendHover } from '../assets';
+import { useState, useRef } from "react";
+import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import { styles } from "../styles";
+import { SectionWrapper } from "../hoc";
+import { DirectionType, slideIn, TransitionType } from "../utils/motion";
+import { send, sendHover } from "../assets";
+import { environment } from "../environment";
 
 const Contact = () => {
-  const formRef = useRef();
+  const formRef = useRef(null);
+  const imgRef = useRef<HTMLImageElement>(null);
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
 
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     setLoading(true);
 
-    // sign up on emailjs.com (select the gmail service and connect your account).
-    //click on create a new template then click on save.
     emailjs
       .send(
-        'service_mzcdpkw', // paste your ServiceID here (you'll get one when your service is created).
-        'templateID', // paste your TemplateID here (you'll find it under email templates).
+        environment.EMAILJS_SERVICE_ID,
+        environment.EMAILJS_TEMPLATE_ID,
         {
           from_name: form.name,
-          to_name: 'Julian', // put your name here.
-          from_email: form.email,
-          to_email: 'castravet.iulian@gmail.com', //put your email here.
+          to_name: "Julian",
+          from_mail: form.email,
+          to_email: "castravet.iulian@gmail.com",
           message: form.message,
         },
-        '294Aup5BCW5AlVIZg' //paste your Public Key here. You'll get it in your profile section.
+        environment.EMAILJS_PUBLIC_KEY
       )
       .then(
         () => {
           setLoading(false);
-          alert('Thank you. I will get back to you as soon as possible.');
+          alert("Thank you. I will get back to you as soon as possible.");
 
           setForm({
-            name: '',
-            email: '',
-            message: '',
+            name: "",
+            email: "",
+            message: "",
           });
         },
         (error) => {
           setLoading(false);
           console.log(error);
-          alert('Something went wrong. Please try again.');
+          alert("Something went wrong. Please try again.");
         }
       );
   };
@@ -62,17 +62,20 @@ const Contact = () => {
   return (
     <div
       className="-mt-[8rem] xl:flex-row flex-col-reverse 
-      flex gap-10 overflow-hidden">
+      flex gap-10 overflow-hidden"
+    >
       <motion.div
-        variants={slideIn('left', 'tween', 0.2, 1)}
-        className="flex-[0.75] bg-jet p-8 rounded-2xl">
+        variants={slideIn(DirectionType.left, TransitionType.tween, 0.2, 1)}
+        className="flex-[0.75] bg-jet p-8 rounded-2xl"
+      >
         <p className={styles.sectionSubText}>Get in touch</p>
         <h3 className={styles.sectionHeadTextLight}>Contact.</h3>
 
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="mt-10 flex flex-col gap-6 font-poppins">
+          className="mt-10 flex flex-col gap-6 font-poppins"
+        >
           <label className="flex flex-col">
             <span className="text-timberWolf font-medium mb-4">Your Name</span>
             <input
@@ -106,7 +109,7 @@ const Contact = () => {
               Your Message
             </span>
             <textarea
-              rows="7"
+              rows={7}
               name="message"
               value={form.message}
               onChange={handleChange}
@@ -127,15 +130,15 @@ const Contact = () => {
             hover:bg-battleGray hover:text-eerieBlack 
             transition duration-[0.2s] ease-in-out"
             onMouseOver={() => {
-              document
-                .querySelector('.contact-btn')
-                .setAttribute('src', sendHover);
+              imgRef.current?.setAttribute("src", sendHover);
             }}
             onMouseOut={() => {
-              document.querySelector('.contact-btn').setAttribute('src', send);
-            }}>
-            {loading ? 'Sending' : 'Send'}
+              imgRef.current?.setAttribute("src", send);
+            }}
+          >
+            {loading ? "Sending" : "Send"}
             <img
+            ref={imgRef}
               src={send}
               alt="send"
               className="contact-btn sm:w-[26px] sm:h-[26px] 
@@ -148,4 +151,4 @@ const Contact = () => {
   );
 };
 
-export default SectionWrapper(Contact, 'contact');
+export default SectionWrapper(Contact, "contact");
