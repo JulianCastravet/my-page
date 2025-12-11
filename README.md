@@ -18,7 +18,7 @@ The code in this repository is released under the [MIT](https://github.com/shaqd
 
 ## Live Demo
 
-- Click [here](https://juliancastravet.github.io/myPage/) to view the live demo.
+- Click [here](https://juliancastravet.github.io/my-page/) to view the live demo.
 
 ## Getting Started
 
