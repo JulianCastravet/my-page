@@ -78,7 +78,7 @@ npm run preview
 👤 **Julian Castravet** in collaboration with 👤 **Shaquille Ndunda**
 
 - GitHub: [@JulianCastravet](https://github.com/JulianCastravet)
-- LinkedIn: [Julian Castravet](https://www.linkedin.com/in/julian-castravet-a67698133/)
+- LinkedIn: [Julian Castravet](https://www.linkedin.com/in/iulian-castravet-a67698133/)
 
 ## Feedback and Contributions
 
